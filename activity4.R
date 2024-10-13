@@ -29,13 +29,8 @@ for(i in 8:nrow(Jan22)){ #start from row 8 all the way to last row of Jan22 data
   rollAveTemp[i] <- mean(Jan22$AirTemp[(i-7):i])} # For each iteration, calculates the mean of air temperature over past 8 days
 Jan22$rollAveTemp <- rollAveTemp
 
-ggplot(Jan22, aes(x = dateF, y = rollAveTemp)) +
-  geom_line(na.rm = T) +
-  labs(x = "Date", y = "Rolling Average Temperature (C)") +
-  theme_classic()
-
 # Homework question 1
-# Precipitation data from Clinton
+# Precipitation 
 # Exclude any precipitations that occurs when the air temperature is below zero
 # Exclude any precipitation measurement if X and Y levels are more than 2 degrees
 
@@ -70,7 +65,7 @@ unrealisticObs <- function(x, range) {
 }
 
 weather$AirTemp_Outliers <- unrealisticObs(weather$AirTemp, range = c(-50, 60))
-weather$SolRad_Outliers <- unrealisticObs(weather$SolRad, range = c(90, 1750))
+weather$SolRad_Outliers <- unrealisticObs(weather$SolRad, range = c(0, 1750))
 
 summary(weather$AirTemp_Outliers)
 summary(weather$SolRad_Outliers)
